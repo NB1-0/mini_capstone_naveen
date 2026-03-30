@@ -1,0 +1,11 @@
+ROLE_ADMIN = "admin"
+ROLE_CUSTOMER = "customer"
+
+ORDER_STATUS_PENDING = "pending"
+ORDER_STATUS_COMPLETED = "completed"
+ORDER_STATUS_CANCELLED = "cancelled"
+
+USERS_COLLECTION = "users"
+BOOKS_COLLECTION = "books"
+ORDERS_COLLECTION = "orders"
+ORDER_ITEMS_COLLECTION = "order_items"
