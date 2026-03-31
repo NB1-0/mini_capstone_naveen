@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 16px;
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    background: #f3ede0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.section-header,
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.stack-list {
+    display: grid;
+    gap: 8px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #cfcfcf;
+    background-color: #ffffff;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid rgba(20, 90, 200, 0.2);
+    border-color: rgba(20, 90, 200, 0.5);
+}
+
+button,
+.link-button {
+    background-color: #2f6fd6;
+    color: #ffffff;
+    border: 1px solid #2f6fd6;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+}
+
+button:hover,
+.link-button:hover {
+    background-color: #2559a8;
+    border-color: #2559a8;
+}
+
+.catalog-grid,
+.stack-list {
+    display: grid;
+    gap: 12px;
+}
+
+.book-card {
+    border: 1px solid #e2dfd8;
+    background: #fbf7ef;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.book-card h4 {
+    margin: 6px 0;
+    font-size: 1rem;
+}
+
+.price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.price-tag {
+    font-weight: 600;
+}
+
+.page-section {
+    margin: 12px 0;
+    padding: 12px;
+    border: 1px solid #e3ddcf;
+    background: #ffffff;
+    border-radius: 10px;
+}

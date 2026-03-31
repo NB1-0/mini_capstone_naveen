@@ -4,231 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StoryShelf Console</title>
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/assets/simple.css">
 </head>
 <body>
-    <div class="page-shell">
-        <header class="hero">
-            <nav class="topbar">
-                <div class="brand-lockup">
-                    <span class="brand-mark">SS</span>
-                    <div>
-                        <p class="eyebrow">Online Bookstore Frontend</p>
-                        <h1>StoryShelf Console</h1>
-                    </div>
-                </div>
-                <div class="topbar-links">
-                    <a href="#catalog-section">Catalog</a>
-                    <a href="#orders-section">Orders</a>
-                    <a href="#admin-panel">Admin</a>
-                    <a href="/docs" target="_blank" rel="noreferrer">Swagger</a>
-                </div>
-            </nav>
-
-            <div class="hero-grid">
-                <section class="hero-copy panel glow-panel">
-                    <p class="eyebrow">Same-origin frontend wired to FastAPI</p>
-                    <h2>Browse books, place orders, and manage inventory from one page.</h2>
-                    <p class="lede">
-                        This lightweight UI sits on top of the existing JWT, books, orders, and admin
-                        endpoints so the backend can be exercised without leaving the app.
-                    </p>
-                    <div class="hero-actions">
-                        <button id="refresh-books-btn" class="primary-button" type="button">Refresh Data</button>
-                        <a class="ghost-button" href="/api/v1/books" target="_blank" rel="noreferrer">Open Books API</a>
-                    </div>
-                    <div class="hero-stats">
-                        <article class="stat-card">
-                            <span class="stat-label">Catalog</span>
-                            <strong id="stat-books">0</strong>
-                            <span class="stat-caption">public listings</span>
-                        </article>
-                        <article class="stat-card">
-                            <span class="stat-label">My Orders</span>
-                            <strong id="stat-orders">0</strong>
-                            <span class="stat-caption">customer history</span>
-                        </article>
-                        <article class="stat-card">
-                            <span class="stat-label">Admin Queue</span>
-                            <strong id="stat-admin-orders">0</strong>
-                            <span class="stat-caption">all order records</span>
-                        </article>
-                    </div>
-                </section>
-
-                <aside class="panel auth-panel">
-                    <div class="section-heading compact">
-                        <div>
-                            <p class="eyebrow">Account</p>
-                            <h3>Sign in or create a customer account</h3>
-                        </div>
-                        <button id="logout-btn" class="ghost-button hidden" type="button">Log Out</button>
-                    </div>
-
-                    <div id="session-summary" class="session-summary hidden">
-                        <p class="session-label">Signed in as</p>
-                        <h4 id="session-email">Guest</h4>
-                        <div class="session-meta">
-                            <span id="session-role" class="pill">guest</span>
-                            <span id="session-created" class="muted-text">Browse the public catalog below.</span>
-                        </div>
-                    </div>
-
-                    <div id="auth-forms">
-                        <div class="auth-tabs" role="tablist" aria-label="Authentication views">
-                            <button id="auth-tab-login" class="auth-tab active" type="button">Login</button>
-                            <button id="auth-tab-register" class="auth-tab" type="button">Register</button>
-                        </div>
-
-                        <form id="login-form" class="auth-form">
-                            <label>
-                                Email
-                                <input type="email" name="email" placeholder="customer@example.com" required>
-                            </label>
-                            <label>
-                                Password
-                                <input type="password" name="password" placeholder="Minimum 8 characters" required>
-                            </label>
-                            <button class="primary-button full-width" type="submit">Login</button>
-                        </form>
-
-                        <form id="register-form" class="auth-form hidden">
-                            <label>
-                                Email
-                                <input type="email" name="email" placeholder="new-reader@example.com" required>
-                            </label>
-                            <label>
-                                Password
-                                <input type="password" name="password" placeholder="Minimum 8 characters" required>
-                            </label>
-                            <button class="primary-button full-width" type="submit">Register</button>
-                        </form>
-
-                        <p class="auth-footnote">
-                            Customer registration uses the existing `POST /api/v1/auth/register` endpoint.
-                            Admin users can sign in with the account created by the backend setup scripts.
-                        </p>
-                    </div>
-                </aside>
+    <div class="container">
+        <header class="page-header">
+            <h1>StoryShelf Console</h1>
+            <p class="muted-text">Mini project frontend for the bookstore API.</p>
+            <div class="actions">
+                <button id="refresh-books-btn" class="primary-button" type="button">Refresh Data</button>
+                <a class="link-button" href="/api/v1/books" target="_blank" rel="noreferrer">Open Books API</a>
+                <a class="link-button" href="/docs" target="_blank" rel="noreferrer">Swagger</a>
             </div>
         </header>
 
-        <main class="dashboard">
-            <section class="panel banner-panel">
-                <div class="section-heading compact">
-                    <div>
-                        <p class="eyebrow">Activity</p>
-                        <h3>Live backend status</h3>
-                    </div>
-                    <button id="clear-message-btn" class="text-button" type="button">Clear</button>
-                </div>
-                <div id="message-banner" class="message-banner info">
-                    Browse the catalog below. Sign in as a customer to place orders or as an admin to manage the store.
-                </div>
-            </section>
+        <section class="panel page-section">
+            <div class="section-header">
+                <h2>Account</h2>
+                <button id="logout-btn" class="ghost-button hidden" type="button">Log Out</button>
+            </div>
 
-            <section id="catalog-section" class="panel">
-                <div class="section-heading">
-                    <div>
-                        <p class="eyebrow">Books</p>
-                        <h3>Catalog</h3>
-                    </div>
-                    <span id="catalog-count" class="pill">0 books</span>
-                </div>
-                <div id="catalog-grid" class="catalog-grid"></div>
-            </section>
+            <div id="session-summary" class="session-summary hidden">
+                <p>Signed in as <strong id="session-email">Guest</strong></p>
+                <p class="muted-text">
+                    Role: <span id="session-role">guest</span> | <span id="session-created">Browse the public catalog below.</span>
+                </p>
+            </div>
 
-            <section class="dashboard-grid">
-                <section class="panel">
-                    <div class="section-heading">
-                        <div>
-                            <p class="eyebrow">Checkout</p>
-                            <h3>Cart</h3>
-                        </div>
-                        <span id="cart-summary" class="pill">0 items</span>
-                    </div>
-                    <div id="cart-items" class="stack-list"></div>
-                    <button id="checkout-btn" class="primary-button full-width" type="button">Place Order</button>
-                    <p id="checkout-hint" class="muted-text">
-                        Customer accounts can create orders through `POST /api/v1/orders`.
-                    </p>
-                </section>
-
-                <section id="orders-section" class="panel">
-                    <div class="section-heading">
-                        <div>
-                            <p class="eyebrow">Customer</p>
-                            <h3>My Orders</h3>
-                        </div>
-                        <button id="refresh-orders-btn" class="ghost-button" type="button">Refresh Orders</button>
-                    </div>
-                    <div id="orders-list" class="stack-list"></div>
-                </section>
-            </section>
-
-            <section id="admin-panel" class="panel hidden">
-                <div class="section-heading">
-                    <div>
-                        <p class="eyebrow">Admin</p>
-                        <h3>Store Operations</h3>
-                    </div>
-                    <button id="refresh-admin-btn" class="ghost-button" type="button">Refresh Admin Data</button>
+            <div id="auth-forms">
+                <div class="auth-tabs" role="tablist" aria-label="Authentication views">
+                    <button id="auth-tab-login" class="auth-tab active" type="button">Login</button>
+                    <button id="auth-tab-register" class="auth-tab" type="button">Register</button>
                 </div>
 
-                <div class="admin-grid">
-                    <section class="panel inset-panel">
-                        <div class="section-heading compact">
-                            <div>
-                                <p class="eyebrow">Reporting</p>
-                                <h4>Sales Snapshot</h4>
-                            </div>
-                        </div>
-                        <div id="sales-report" class="metric-grid"></div>
-                    </section>
+                <form id="login-form" class="stack-list">
+                    <label>
+                        Email
+                        <input type="email" name="email" placeholder="customer@example.com" required>
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" name="password" placeholder="Minimum 8 characters" required>
+                    </label>
+                    <button class="primary-button" type="submit">Login</button>
+                </form>
 
-                    <section class="panel inset-panel">
-                        <div class="section-heading compact">
-                            <div>
-                                <p class="eyebrow">Inventory</p>
-                                <h4 id="book-form-heading">Create Book</h4>
-                            </div>
-                        </div>
-                        <form id="book-form" class="book-form">
-                            <label>
-                                Title
-                                <input type="text" name="title" maxlength="255" required>
-                            </label>
-                            <label>
-                                Author
-                                <input type="text" name="author" maxlength="255" required>
-                            </label>
-                            <label>
-                                Price
-                                <input type="number" name="price" min="0.01" step="0.01" required>
-                            </label>
-                            <label>
-                                Stock
-                                <input type="number" name="stock" min="0" step="1" required>
-                            </label>
-                            <div class="form-actions">
-                                <button id="book-form-submit" class="primary-button" type="submit">Create Book</button>
-                                <button id="book-form-cancel" class="ghost-button hidden" type="button">Cancel Edit</button>
-                            </div>
-                        </form>
-                    </section>
+                <form id="register-form" class="stack-list hidden">
+                    <label>
+                        Email
+                        <input type="email" name="email" placeholder="new-reader@example.com" required>
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" name="password" placeholder="Minimum 8 characters" required>
+                    </label>
+                    <button class="primary-button" type="submit">Register</button>
+                </form>
+            </div>
+        </section>
 
-                    <section class="panel inset-panel admin-orders-panel">
-                        <div class="section-heading compact">
-                            <div>
-                                <p class="eyebrow">Fulfillment</p>
-                                <h4>Order Queue</h4>
-                            </div>
-                        </div>
-                        <div id="admin-orders" class="stack-list"></div>
-                    </section>
+        <section class="panel page-section">
+            <div class="section-header">
+                <h2>Status</h2>
+                <button id="clear-message-btn" class="text-button" type="button">Clear</button>
+            </div>
+            <div id="message-banner" class="message-banner info">
+                Browse the catalog below. Sign in as a customer to place orders or as an admin to manage the store.
+            </div>
+        </section>
+
+        <section class="panel page-section">
+            <h2>Quick Stats</h2>
+            <div class="stats">
+                <div>
+                    <span class="stat-label">Catalog</span>
+                    <strong id="stat-books">0</strong>
                 </div>
-            </section>
-        </main>
+                <div>
+                    <span class="stat-label">My Orders</span>
+                    <strong id="stat-orders">0</strong>
+                </div>
+                <div>
+                    <span class="stat-label">Admin Queue</span>
+                    <strong id="stat-admin-orders">0</strong>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalog-section" class="panel page-section">
+            <div class="section-header">
+                <h2>Catalog</h2>
+                <span id="catalog-count" class="pill">0 books</span>
+            </div>
+            <div id="catalog-grid" class="stack-list"></div>
+        </section>
+
+        <section class="panel page-section">
+            <div class="section-header">
+                <h2>Cart</h2>
+                <span id="cart-summary" class="pill">0 items</span>
+            </div>
+            <div id="cart-items" class="stack-list"></div>
+            <button id="checkout-btn" class="primary-button" type="button">Place Order</button>
+            <p id="checkout-hint" class="muted-text">
+                Customer accounts can create orders through POST /api/v1/orders.
+            </p>
+        </section>
+
+        <section id="orders-section" class="panel page-section">
+            <div class="section-header">
+                <h2>My Orders</h2>
+                <button id="refresh-orders-btn" class="ghost-button" type="button">Refresh Orders</button>
+            </div>
+            <div id="orders-list" class="stack-list"></div>
+        </section>
+
+        <section id="admin-panel" class="panel page-section hidden">
+            <div class="section-header">
+                <h2>Admin</h2>
+                <button id="refresh-admin-btn" class="ghost-button" type="button">Refresh Admin Data</button>
+            </div>
+
+            <div class="stack-list">
+                <div>
+                    <h3>Sales Report</h3>
+                    <div id="sales-report" class="metric-grid"></div>
+                </div>
+
+                <div>
+                    <h3 id="book-form-heading">Create Book</h3>
+                    <form id="book-form" class="stack-list">
+                        <label>
+                            Title
+                            <input type="text" name="title" maxlength="255" required>
+                        </label>
+                        <label>
+                            Author
+                            <input type="text" name="author" maxlength="255" required>
+                        </label>
+                        <label>
+                            Price
+                            <input type="number" name="price" min="0.01" step="0.01" required>
+                        </label>
+                        <label>
+                            Stock
+                            <input type="number" name="stock" min="0" step="1" required>
+                        </label>
+                        <div class="form-actions">
+                            <button id="book-form-submit" class="primary-button" type="submit">Create Book</button>
+                            <button id="book-form-cancel" class="ghost-button hidden" type="button">Cancel Edit</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <h3>Order Queue</h3>
+                    <div id="admin-orders" class="stack-list"></div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script type="module" src="/assets/app.js"></script>
